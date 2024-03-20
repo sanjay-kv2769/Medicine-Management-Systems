@@ -34,6 +34,7 @@ loginRoutes.post('/', async (req, res) => {
         error: false,
         message: 'Login Successful',
         role: oldUser.role,
+        login_id: oldUser._id,
       });
     } else {
       return res.status(400).json({
