@@ -4,10 +4,10 @@ const staffDB = require('../models/staffSchema');
 const loginDB = require('../models/loginSchema');
 const bcrypt = require('bcryptjs');
 const { default: mongoose } = require('mongoose');
+const complaintsDB = require('../models/complaintSchema');
 const adminRoutes = express.Router();
 
 // ------------------------------Medicine--------------------------------------
-
 
 adminRoutes.post('/add-med', async (req, res) => {
   try {
@@ -326,8 +326,54 @@ adminRoutes.put('/update-staff/:id', async (req, res) => {
   }
 });
 
-adminRoutes.delete('/delete-staff/:id', async (req, res) => {
-  
+adminRoutes.delete('/delete-staff/:login_id', async (req, res) => {
+  try {
+    const staffData = await staffDB.deleteOne({
+      login_id: req.params.login_id,
+    });
+    const logData = await loginDB.deleteOne({ _id: req.params.login_id });
+    if (staffData && logData) {
+      return res.status(200).json({
+        Success: true,
+        Error: false,
+        Message: 'Deleted staff data',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
+
+adminRoutes.get('/view-complaints', async (req, res) => {
+  try {
+    const Data = await complaintsDB.find();
+    if (Data) {
+      return res.status(201).json({
+        Success: true,
+        Error: false,
+        data: Data,
+        Message: 'Complaint fetched successfully',
+      });
+    } else {
+      return res.status(400).json({
+        Success: false,
+        Error: true,
+        Message: 'Failed fetching Complaint ',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
 });
 
 module.exports = adminRoutes;

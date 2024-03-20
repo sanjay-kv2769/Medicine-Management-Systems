@@ -15,6 +15,11 @@ const ordersSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+    default: 'processing',
+  },
 });
 
 var ordersDB = mongoose.model('orders_tb', ordersSchema);

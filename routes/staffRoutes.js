@@ -1,6 +1,7 @@
 const express = require('express');
 const medicineDB = require('../models/medicineSchema');
 const staffDB = require('../models/staffSchema');
+const ordersDB = require('../models/ordersSchema');
 const staffRoutes = express.Router();
 
 staffRoutes.put('/update-med-stock/:id', async (req, res) => {
@@ -144,7 +145,81 @@ staffRoutes.put('/attendance-med/:id', async (req, res) => {
   }
 });
 
+staffRoutes.get('/view-orders', async (req, res) => {
+  try {
+    const result = await ordersDB.aggregate([
+      {
+        $lookup: {
+          from: 'medicine_tbs',
+          localField: 'medicine_id',
+          foreignField: '_id',
+          as: 'medicine_data',
+        },
+      },
+      {
+        $unwind: '$medicine_data',
+      },
+      {
+        $lookup: {
+          from: 'login_tbs',
+          localField: 'login_id',
+          foreignField: '_id',
+          as: 'login_data',
+        },
+      },
+      {
+        $unwind: '$login_data',
+      },
+    ]);
+    return res.status(200).json({
+      Success: true,
+      Error: false,
+      Data: result,
+      Message: 'Order data fetched successfully',
+    });
+    // return res.send(result);
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
 
+staffRoutes.put('/order-status-update/:id', async (req, res) => {
+  try {
+    const order_id = req.params.id;
 
+    const updatedData = await ordersDB.updateOne(
+      { _id: order_id },
+      { $set: { status: 'Order Success' } }
+    );
+
+    if (updatedData) {
+      res.status(200).json({
+        success: true,
+        error: false,
+        data: updatedData,
+        message: 'Medicine order status updated successfully',
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        error: true,
+        message: 'order status updating failed',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
 
 module.exports = staffRoutes;
+
