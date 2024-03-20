@@ -33,6 +33,7 @@ loginRoutes.post('/', async (req, res) => {
         success: true,
         error: false,
         message: 'Login Successful',
+        role: oldUser.role,
       });
     } else {
       return res.status(400).json({
