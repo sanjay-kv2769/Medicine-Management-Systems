@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const adminRoutes = require('./routes/adminRoutes');
-const registerRoutes = require('./routes/registerRoutes');
-const loginRoutes = require('./routes/loginRoutes');
-const userRoutes = require('./routes/userRoutes');
-const commonRoutes = require('./routes/commonRoutes');
-const physicianRoutes = require('./routes/physicianRoutes');
-const staffRoutes = require('./routes/staffRoutes');
+
+const adminRoutes = require('./src/routes/adminRoutes');
+const registerRoutes = require('./src/routes/registerRoutes');
+const loginRoutes = require('./src/routes/loginRoutes');
+const userRoutes = require('./src/routes/userRoutes');
+const commonRoutes = require('./src/routes/commonRoutes');
+const physicianRoutes = require('./src/routes/physicianRoutes');
+const staffRoutes = require('./src/routes/staffRoutes');
 
 mongoose
   .connect(
@@ -21,9 +22,13 @@ mongoose
     console.log('Error:', error);
   });
 
+app.use(express.static('./public'));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.set('view engine', 'ejs');
+app.set('views', './src/views');
 
 app.use('/api', commonRoutes);
 app.use('/api/admin', adminRoutes);
