@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
-    <title>Medicine Management</title>
+   
+   <title>Medicine Management</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -32,18 +32,18 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="bi bi-ui-checks"></i> Add Staff</h1>
+          <h1><i class="bi bi-ui-checks"></i> Edit Staff</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
           <li class="breadcrumb-item"><a href="/api/admin">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="">Add Staff</a></li>
+          <li class="breadcrumb-item"><a href="">Edit Staff</a></li>
         </ul>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">Add Staff</h3>
+            <h3 class="tile-title">Edit Staff</h3>
 
             <% if (data.Error==true) { %>
             <div class="alert alert-danger" role="alert">
@@ -56,27 +56,18 @@
             <% } %>
             <div class="tile-body">
               <form
-                action="/api/admin/staff"
-                method="post"
+                action="/api/admin/update-staff/<%=Data.login_id%>"
+                method="get"
+                enctype="multipart/form-data"
               >
                 <div class="mb-3">
-                  <label class="form-label">Name</label>
+                  <label class="form-label">Staff Name</label>
                   <input
                     class="form-control"
                     type="text"
                     name="name"
-                    placeholder="Enter name"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    name="email"
-                    placeholder="Enter email"
-                    required
+                    value="<%= Data.name %>"
+                    placeholder="Enter Staff Name"
                   />
                 </div>
                 <div class="mb-3">
@@ -85,8 +76,8 @@
                     class="form-control"
                     type="text"
                     name="phone"
+                    value="<%= Data.phone %>"
                     placeholder="Enter phone"
-                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -95,38 +86,34 @@
                     class="form-control"
                     type="text"
                     name="place"
-                    placeholder="Enter strength"
-                    required
+                    value="<%= Data.place %>"
+
+                    placeholder="Enter place"
                   />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="email"
+                    value="<%= logData?.email %>"
+
+                    placeholder="Enter Email"
+                  />
+                
                 <div class="mb-3">
                   <label class="form-label">Password</label>
                   <input
                     class="form-control"
-                    type="password"
+                    type="text"
                     name="password"
-                    placeholder="Enter password"
-                    required
-                  />
-                
-                
-                <!-- <div class="mb-3">
-                  <label class="form-label">Description</label>
-                  <textarea
-                    class="form-control"
-                    rows="4"
-                    name="description"
-                    placeholder="Enter description"
-                  ></textarea>
-                </div> -->
+                    value="<%= logData?.rawpassword %>"
 
-                <!-- <div class="mb-3">
-                  <label class="form-label">Image</label>
-                  <input
-                    class="form-control"
-                    name="image"
-                    type="file"
+                    placeholder="Enter Password"
                   />
-                </div> -->
+                
+                </div>
                 <div class="tile-footer">
                   <button class="btn btn-primary" type="submit">
                     <i class="bi bi-check-circle-fill me-2"></i>Save
@@ -139,23 +126,23 @@
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
+    <script src="/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script
       type="text/javascript"
-      src="js/plugins/bootstrap-datepicker.min.js"
+      src="/js/plugins/bootstrap-datepicker.min.js"
     ></script>
-    <script type="text/javascript" src="js/plugins/select2.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/select2.min.js"></script>
     <script
       type="text/javascript"
-      src="js/plugins/bootstrap-datepicker.min.js"
+      src="/js/plugins/bootstrap-datepicker.min.js"
     ></script>
-    <script type="text/javascript" src="js/plugins/dropzone.js"></script>
+    <script type="text/javascript" src="/js/plugins/dropzone.js"></script>
     <script type="text/javascript">
       $('#sl').on('click', function () {
         $('#tl').loadingBtn();

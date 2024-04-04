@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
    
-    <title>View Medicine</title>
+    <title>View Complaints</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,61 +24,66 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="bi bi-table"></i>View Staff</h1>
+          <h1><i class="bi bi-table"></i>View Review</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-          <li class="breadcrumb-item"><a href="/api/admin">Dashboard</a></li>
-          <li class="breadcrumb-item active">View Staff</li>
+          <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+          <li class="breadcrumb-item active">View feedback</li>
         </ul>
       </div>
       <div class="row">
         <div class="col-md-12">
           <div class="tile">
-            <h3 class="tile-title">Staff details</h3>
-            <table class="table table-striped text-center">
-              <thead class="table-dark">
+            <h3 class="tile-title">Feedback details</h3>
+            <table class="table table-striped">
+              <thead>
                 <tr>
                   <th>#</th>
-                  <th>Staff Name</th>
+
+                  <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
-                  <th>Place</th>
-                  <th>Password</th>
-                  <th></th>
-                  <th></th>
-                  <!-- <th>Description</th>
-                  <th>Quantity</th>
-                  <th>stock</th>
-                  <th>Price</th> -->
+                  <th>Feedback</th>
+
+
+                  <!-- <th>Purpose</th> -->
+                  <!-- <th>Description</th> -->
+                  <!-- <th>Quantity</th> -->
+                  <!-- <th>stock</th> -->
+                  <!-- <th>Price</th> -->
                 </tr>
               </thead>
               <tbody>
                 <% for(i=0;i<Data.length;i++){%>
                 <tr>
-                  <td><%= i+1 %></td>
-                  <td><%= Data[i].name%></td>
-                  <td><%= Data[i].email%></td>
-                  <td><%= Data[i].phone%></td>
-                  <td><%= Data[i].place%></td>
-                  <td><%= Data[i].rawpassword%></td>
-                  <!-- <td><%= Data[i].description%></td>
+                   <td><%=i+1%></td>
+                  <td><%= Data[i].register_data.name%></td>
+                  <td><%= Data[i].login_data.email%></td>
+                  <td><%= Data[i].register_data.phone%></td>
+                  <td><%= Data[i].feedback%></td>
+                  
+                 
+            <td><%= Data[i].reply%></td>
+
+                  <!-- <td><%= Data[i].purpose%></td>
+                  <td><%= Data[i].description%></td>
                   <td><%= Data[i].quantity%></td>
                   <td><%= Data[i].stock%></td>
                   <td><%= Data[i].price%></td> -->
                   <!-- <td><img src="<%= Data[i].image%>" width="50" height="50" alt=""></td> -->
-                    <form
-                  action="/api/admin/edit-staff/<%= Data[i].login_id %>"
+                    <!-- <form
+                  action="/api/admin/edit-med/<%= Data[i]._id %>"
                 method="GET"
                   >
                   <td><button class="btn btn-warning">Update</button></td>
-                  </form> 
-                    <form
-                  action="/api/admin/delete-staff/<%= Data[i].login_id %>"
+                  </form>  -->
+                    <!-- <form
+                  action="/api/admin/delete-med/<%= Data[i]._id %>"
                 method="GET"
                   >
                   <td><button class="btn btn-danger">Delete</button></td>
-                  </form>
+                  </form> -->
 
                 </tr>
                <%}%>

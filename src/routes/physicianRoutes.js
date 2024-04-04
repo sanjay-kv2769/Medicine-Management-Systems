@@ -59,51 +59,54 @@ physicianRoutes.post('/add-med', upload.single('image'), async (req, res) => {
   }
 });
 
-physicianRoutes.put('/update-med/:id',upload.single('image'), async (req, res) => {
-  try {
-    const previousData = await medicineDB.findOne({ _id: req.params.id });
+physicianRoutes.put(
+  '/update-med/:id',
+  upload.single('image'),
+  async (req, res) => {
+    try {
+      const previousData = await medicineDB.findOne({ _id: req.params.id });
 
-    var Medicine = {
-      medicine: req.body ? req.body.medicine : previousData.medicine,
-      composition: req.body ? req.body.medicine : previousData.composition,
-      brand: req.body ? req.body.brand : previousData.brand,
-      strength: req.body ? req.body.strength : previousData.strength,
-      purpose: req.body ? req.body.purpose : previousData.purpose,
-      description: req.body ? req.body.description : previousData.description,
-      quantity: req.body ? req.body.quantity : previousData.quantity,
-      price: req.body ? req.body.price : previousData.price,
-      image: req.file ? req.file.path : previousData.image,
-     
-    };
-    console.log(Medicine);
-    const Data = await medicineDB.updateOne(
-      { _id: req.params.id },
-      { $set: Medicine }
-    );
+      var Medicine = {
+        medicine: req.body ? req.body.medicine : previousData.medicine,
+        composition: req.body ? req.body.medicine : previousData.composition,
+        brand: req.body ? req.body.brand : previousData.brand,
+        strength: req.body ? req.body.strength : previousData.strength,
+        purpose: req.body ? req.body.purpose : previousData.purpose,
+        description: req.body ? req.body.description : previousData.description,
+        quantity: req.body ? req.body.quantity : previousData.quantity,
+        price: req.body ? req.body.price : previousData.price,
+        image: req.file ? req.file.path : previousData.image,
+      };
+      console.log(Medicine);
+      const Data = await medicineDB.updateOne(
+        { _id: req.params.id },
+        { $set: Medicine }
+      );
 
-    if (Data) {
-      return res.status(200).json({
-        Success: true,
-        Error: false,
-        data: Data,
-        Message: 'Medicine updated successfully',
-      });
-    } else {
-      return res.status(400).json({
+      if (Data) {
+        return res.status(200).json({
+          Success: true,
+          Error: false,
+          data: Data,
+          Message: 'Medicine updated successfully',
+        });
+      } else {
+        return res.status(400).json({
+          Success: false,
+          Error: true,
+          Message: 'Failed while updating Medicine',
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
         Success: false,
         Error: true,
-        Message: 'Failed while updating Medicine',
+        Message: 'Internal Server Error',
+        ErrorMessage: error.message,
       });
     }
-  } catch (error) {
-    return res.status(500).json({
-      Success: false,
-      Error: true,
-      Message: 'Internal Server Error',
-      ErrorMessage: error.message,
-    });
   }
-});
+);
 
 physicianRoutes.delete('/delete-med/:id', async (req, res) => {
   try {

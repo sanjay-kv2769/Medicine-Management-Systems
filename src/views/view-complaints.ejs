@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
-    <!-- Twitter meta-->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:site" content="@pratikborsadiya">
-    <meta property="twitter:creator" content="@pratikborsadiya">
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vali Admin">
-    <meta property="og:title" content="Vali - Free Bootstrap 5 admin theme">
-    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
-    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
-    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
+   
     <title>View Complaints</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,11 +40,17 @@
               <thead>
                 <tr>
                   <th>#</th>
+
+                  <th>Date</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
                   <th></th>
                   <th>Complaint</th>
+                  <th>Reply</th>
+                  <th>Replied Message</th>
+
+
                   <!-- <th>Purpose</th> -->
                   <!-- <th>Description</th> -->
                   <!-- <th>Quantity</th> -->
@@ -66,12 +61,27 @@
               <tbody>
                 <% for(i=0;i<Data.length;i++){%>
                 <tr>
-                  <td>1</td>
+                   <td><%=i+1%></td>
+                  <td><%= Data[i].date%></td>
                   <td><%= Data[i].register_data.name%></td>
                   <td><%= Data[i].login_data.email%></td>
                   <td><%= Data[i].register_data.phone%></td>
                   <td></td>
                   <td><%= Data[i].complaint%></td>
+                  
+                  <form action="/api/admin/reply-complaint/<%=Data[i].login_id%>/<%=Data[i].date%>"
+                    method="get">
+
+                    <td><input 
+                      class="form-control"
+                      type="text" name="reply" placeholder="Enter reply message" required>
+                    
+                     <button type="submit" class="btn btn-success pt-1 pb-1">Send Reply</button>
+                    </td>
+                 
+                  </form>
+            <td><%= Data[i].reply%></td>
+
                   <!-- <td><%= Data[i].purpose%></td>
                   <td><%= Data[i].description%></td>
                   <td><%= Data[i].quantity%></td>

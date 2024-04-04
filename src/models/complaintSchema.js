@@ -10,6 +10,14 @@ const complaintsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  reply: {
+    type: String,
+    default: '',
+  },
+  date:{
+    type:String,
+    required:true
+  }
 });
 
 var complaintsDB = mongoose.model('complaints_tb', complaintsSchema);

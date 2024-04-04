@@ -3,6 +3,7 @@ const medicineDB = require('../models/medicineSchema');
 const ordersDB = require('../models/ordersSchema');
 const { default: mongoose } = require('mongoose');
 const complaintsDB = require('../models/complaintSchema');
+const feedbacksDB = require('../models/feedbackSchema');
 const userRoutes = express.Router();
 
 userRoutes.post('/order-med/:login_id/:med_id', async (req, res) => {
@@ -94,6 +95,7 @@ userRoutes.post('/add-complaint/:login_id', async (req, res) => {
     const Complaint = {
       login_id: req.params.login_id,
       complaint: req.body.complaint,
+      date: req.body.date,
     };
     const Data = await complaintsDB(Complaint).save();
     // console.log(Data);
@@ -147,5 +149,65 @@ userRoutes.get('/view-complaint/:login_id', async (req, res) => {
     });
   }
 });
+
+userRoutes.post('/add-feedback/:login_id', async (req, res) => {
+  try {
+    const Complaint = {
+      login_id: req.params.login_id,
+      feedback: req.body.feedback,
+    };
+    const Data = await feedbacksDB(Complaint).save();
+    // console.log(Data);
+    if (Data) {
+      return res.status(201).json({
+        Success: true,
+        Error: false,
+        data: Data,
+        Message: 'Complaint added successfully',
+      });
+    } else {
+      return res.status(400).json({
+        Success: false,
+        Error: true,
+        Message: 'Failed adding Complaint ',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
+
+userRoutes.get('/view-feedback/:login_id', async (req, res) => {
+  try {
+    const Data = await feedbacksDB.find({ login_id: req.params.login_id });
+    if (Data) {
+      return res.status(201).json({
+        Success: true,
+        Error: false,
+        data: Data,
+        Message: 'Feedback fetched successfully',
+      });
+    } else {
+      return res.status(400).json({
+        Success: false,
+        Error: true,
+        Message: 'Failed fetching Feedback ',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
+
 
 module.exports = userRoutes;

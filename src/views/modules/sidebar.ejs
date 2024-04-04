@@ -1,7 +1,7 @@
 <aside class="app-sidebar">
   <ul class="app-menu">
     <li>
-      <a class="app-menu__item active" href="/admin"
+      <a class="app-menu__item active" href="/api/admin"
         ><i class="app-menu__icon bi bi-speedometer"></i
         ><span class="app-menu__label">Dashboard</span></a
       >
@@ -52,6 +52,25 @@
     <li class="treeview">
       <a class="app-menu__item" href="#" data-toggle="treeview"
         ><i class="app-menu__icon bi bi-table"></i
+        ><span class="app-menu__label">Reviews</span
+        ><i class="treeview-indicator bi bi-chevron-right"></i
+      ></a>
+      <ul class="treeview-menu">
+        <li>
+          <a class="treeview-item" href="/api/admin/view-feedback"
+            ><i class="icon bi bi-circle-fill"></i> View Feedbacks</a
+          >
+        </li>
+        <!-- <li>
+          <a class="treeview-item" href="table-data-table.html"
+            ><i class="icon bi bi-circle-fill"></i> Data Tables</a
+          >
+        </li> -->
+      </ul>
+    </li>
+    <li class="treeview">
+      <a class="app-menu__item" href="#" data-toggle="treeview"
+        ><i class="app-menu__icon bi bi-table"></i
         ><span class="app-menu__label">Complaints</span
         ><i class="treeview-indicator bi bi-chevron-right"></i
       ></a>
@@ -61,14 +80,14 @@
             ><i class="icon bi bi-circle-fill"></i> View Complaints</a
           >
         </li>
-        <li>
+        <!-- <li>
           <a class="treeview-item" href="table-data-table.html"
             ><i class="icon bi bi-circle-fill"></i> Data Tables</a
           >
-        </li>
+        </li> -->
       </ul>
     </li>
-    <li class="treeview">
+    <!-- <li class="treeview">
       <a class="app-menu__item" href="#" data-toggle="treeview"
         ><i class="app-menu__icon bi bi-file-earmark"></i
         ><span class="app-menu__label">Pages</span
@@ -117,6 +136,6 @@
         ><i class="app-menu__icon bi bi-code-square"></i
         ><span class="app-menu__label">Docs</span></a
       >
-    </li>
+    </li> -->
   </ul>
 </aside>

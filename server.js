@@ -38,10 +38,12 @@ app.use('/api/physician', physicianRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/login', loginRoutes);
 
+// app.get('/', (req, res) => {
+//   res.send('hello world');
+// });
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.render('login.ejs', { Message: '' });
 });
-
 const PORT = 8080;
 app.listen(PORT, () => {
   console.log('Server started on', PORT);

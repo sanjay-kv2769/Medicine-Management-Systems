@@ -1,31 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta
-      name="description"
-      content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular."
-    />
-    <!-- Twitter meta-->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:site" content="@pratikborsadiya" />
-    <meta property="twitter:creator" content="@pratikborsadiya" />
-    <!-- Open Graph Meta-->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Vali Admin" />
-    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme" />
-    <meta
-      property="og:url"
-      content="http://pratikborsadiya.in/blog/vali-admin"
-    />
-    <meta
-      property="og:image"
-      content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png"
-    />
-    <meta
-      property="og:description"
-      content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular."
-    />
-    <title>Book My Turf</title>
+    
+   <title>Medicine Management</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,33 +22,8 @@
   </head>
 
   <body class="app sidebar-mini">
-    <header class="app-header">
-      <a class="app-header__logo" href="index.html">medicine management</a>
-      <a
-        class="app-sidebar__toggle"
-        href="#"
-        data-toggle="sidebar"
-        aria-label="Hide Sidebar"
-      ></a>
-      <ul class="app-nav">
-        <li class="dropdown">
-          <a
-            class="app-nav__item"
-            href="#"
-            data-bs-toggle="dropdown"
-            aria-label="Open Profile Menu"
-            ><i class="bi bi-person fs-4"></i
-          ></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li>
-              <a class="dropdown-item" href="page-login.html"
-                ><i class="bi bi-box-arrow-right me-2 fs-5"></i> Logout</a
-              >
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </header>
+        <%- include('./modules/header') %>
+
 
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 
@@ -84,7 +36,7 @@
         </div>
         <ul class="app-breadcrumb breadcrumb">
           <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-          <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="/api/admin">Dashboard</a></li>
           <li class="breadcrumb-item"><a href="">Edit Medicine</a></li>
         </ul>
       </div>
@@ -104,7 +56,7 @@
             <% } %>
             <div class="tile-body">
               <form
-                action="/api/admin/add-med"
+                action="/api/admin/update-med/<%=Data._id%>"
                 method="post"
                 enctype="multipart/form-data"
               >

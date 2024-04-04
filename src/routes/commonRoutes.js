@@ -186,7 +186,6 @@ commonRoutes.get('/profile/staff/:id', async (req, res) => {
   }
 });
 
-
 commonRoutes.get('/profile/physician/:id', async (req, res) => {
   //   console.log(req.params.id);
   try {
