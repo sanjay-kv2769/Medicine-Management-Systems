@@ -105,6 +105,7 @@ adminRoutes.post('/add-med', upload.single('image'), async (req, res) => {
       strength: req.body.strength,
       quantity: req.body.quantity,
       purpose: req.body.purpose,
+      expiry_date:req.body.expiry_date,
       price: req.body.price,
       description: req.body.description,
       image: req.file ? req.file.path : null,
@@ -220,6 +221,9 @@ adminRoutes.post(
         description: req.body.description
           ? req.body.description
           : previousData.description,
+        expiry_date: req.body.expiry_date
+          ? req.body.expiry_date
+          : previousData.expiry_date,
         quantity: req.body.quantity ? req.body.quantity : previousData.quantity,
         price: req.body.price ? req.body.price : previousData.price,
         image: req.file ? req.file.path : previousData.image,
